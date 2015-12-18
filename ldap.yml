@@ -33,11 +33,6 @@
 
   - pause: seconds=30
 
-#  - name: enable apache
-#    command: systemctl enable apacheds.service
-
-#  - service: name=apacheds state=started
-
   - name: import the users
     command: bash -c 'ldapadd -h localhost -p 10389 -D "uid=admin,ou=system" -w secret < /tmp/create.ldif'
 
