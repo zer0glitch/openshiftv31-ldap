@@ -21,8 +21,8 @@ oauthConfig:
         - uid
       bindDN: "uid=admin,ou=system"
       bindPassword: "secret"
-      insecure: true
-      url: "ldap://<opentlcip>:10389/dc=opentlc07a7,dc=com?uid"
+      insecure: true # false for ldaps
+      url: "ldap://<opentlcip>:10389/dc=opentlc07a7,dc=com?uid" # change to ldaps 10636 for secure
   masterCA: ca.crt
   masterPublicURL: https://<opentlcip>:8443
   masterURL: https://<opentlcip>:8443
