@@ -1,39 +1,55 @@
-Configuring Openshift lab for ldap authentication
+##Configuring Openshift lab for ldap authentication
 1.  Add a new identity provider
 ```
-- name: "my_ldap_provider" 
-    challenge: true 
-    login: true 
+oauthConfig:
+  assetPublicURL: https://<opentlcip>:8443/console/
+  grantConfig:
+    method: auto
+  identityProviders:
+  - name: apachedsldapauth
+    challenge: true
+    login: true
     provider:
       apiVersion: v1
       kind: LDAPPasswordIdentityProvider
       attributes:
-        id: 
+        id:
         - dn
-        email: 
-        - mail
-        name: 
+        name:
         - cn
-        preferredUsername: 
+        preferredUsername:
         - uid
-      bindDN: "dc=opentlcGUID,dc=com" 
-      bindPassword: "secret" 
-      insecure: true 
-      url: "ldap://oselabGUID/ou=users,dc=openltcGUID,dc=com?uid"
+      bindDN: "uid=admin,ou=system"
+      bindPassword: "secret"
+      insecure: true
+      url: "ldap://<opentlcip>:10389/dc=opentlc07a7,dc=com?uid"
+  masterCA: ca.crt
+  masterPublicURL: https://<opentlcip>:8443
+  masterURL: https://<opentlcip>:8443
+  sessionConfig:
+    sessionMaxAgeSeconds: 3600
+    sessionName: ssn
+    sessionSecretsFile: /etc/origin/master/session-secrets.yaml
+  tokenConfig:
+    accessTokenMaxAgeSeconds: 86400
+    authorizeTokenMaxAgeSeconds: 500
+
 ```
 
 
-Perform the following actions on your jump server or another server to install ApacheDS  
+##Perform the following actions on your jump server or another server to install ApacheDS  
 
-Using a playbook
+###Using a playbook
 
-1 clone the project here https://github.com/zer0glitch/openshiftv31-ldap
-2 modify vars/config.yml with your GUID
-3 ansible-play ldap.yml
+1. clone the project here https://github.com/zer0glitch/openshiftv31-ldap
+
+2. modify vars/config.yml with your GUID
+
+3. ansible-play ldap.yml
 
 
 
-Manual Steps
+###Manual Steps
   1. Download apache ds rpm
 ```
     curl http://mirrors.koehn.com/apache/directory/apacheds/dist/2.0.0-M20/apacheds-2.0.0-M20-x86_64.rpm -o apacheds-2.0.0-M20-x86_64.rpm
