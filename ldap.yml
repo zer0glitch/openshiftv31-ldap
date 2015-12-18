@@ -1,0 +1,46 @@
+---
+- hosts: localhost
+  tasks:
+
+  - include_vars: vars/config.yml
+  
+  - name: Download apache ds rpm
+    command: curl http://mirrors.koehn.com/apache/directory/apacheds/dist/2.0.0-M20/apacheds-2.0.0-M20-x86_64.rpm -o apacheds-2.0.0-M20-x86_64.rpm
+
+  - name: install the rpm
+    command: yum install apacheds-2.0.0-M20-x86_64.rpm -y
+    ignore_errors: true
+ 
+  - name: install Visual software
+    yum: pkg={{item}} state=installed 
+    with_items:
+     - java-1.8.0-openjdk
+     - java-1.8.0-openjdk-devel
+     - openldap-clients
+
+  - name: open iptables port
+    command:  iptables -A INPUT -p tcp --dport 10389 -j ACCEPT
+    ignore_errors: true
+
+  - template: src=templates/config.ldif.j2 dest=/var/lib/apacheds-2.0.0_M20/default/conf/config.ldif
+  - template: src=templates/create.ldif.j2 dest=/tmp/create.ldif
+  - template: src=templates/add_user.ldif.j2 dest=/tmp/add_user.ldif
+
+  - template: src=templates/apacheds.service.j2 dest=/etc/systemd/system/apacheds.service
+
+  - name: start apache
+    command: /etc/init.d/apacheds-2.0.0_M20-default start
+
+  - pause: seconds=30
+
+#  - name: enable apache
+#    command: systemctl enable apacheds.service
+
+#  - service: name=apacheds state=started
+
+  - name: import the users
+    command: bash -c 'ldapadd -h localhost -p 10389 -D "uid=admin,ou=system" -w secret < /tmp/create.ldif'
+
+  - name: import the users
+    command: bash -c 'ldapadd -h localhost -p 10389 -D "uid=admin,ou=system" -w secret < /tmp/add_user.ldif'
+
