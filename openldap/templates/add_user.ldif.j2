@@ -1,0 +1,18 @@
+dn: cn=jamie,ou=People,dc=opentlc{{ GUID }},dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: jamie
+givenName: RedHat
+surName: whetsell
+ou: jamie
+uid: jamie
+userPassword: password
+
+dn: cn=openshift,ou=Group,dc=opentlc{{ GUID }},dc=com
+objectclass: top
+objectclass: groupOfNames
+member: cn=jamie,ou=People,dc=opentlc{{ GUID }},dc=com
+cn: openshift

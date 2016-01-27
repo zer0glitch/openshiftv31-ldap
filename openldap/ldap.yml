@@ -1,0 +1,62 @@
+---
+- hosts: localhost
+  tasks:
+
+  - include_vars: vars/config.yml
+
+  - yum: pkg={{item}} state=installed 
+    with_items:
+     - java-1.8.0-openjdk
+     - java-1.8.0-openjdk-devel
+     - openldap
+     - openldap-servers
+     - openldap-clients
+
+  - name: open iptables port
+    command:  iptables -A INPUT -p tcp --dport 636 -j ACCEPT
+    ignore_errors: true
+  - name: open iptables port
+    command:  iptables -A INPUT -p tcp --dport 389 -j ACCEPT
+    ignore_errors: true
+
+  - template: src=templates/ldap.conf.j2 dest=/etc/openldap/ldap.conf
+
+  - template: src=templates/create.ldif.j2 dest=/tmp/create.ldif
+  - template: src=templates/add_user.ldif.j2 dest=/tmp/add_user.ldif
+  - template: src=templates/changepass.ldif.j2 dest=/tmp/changepass.ldif
+  - template: src=templates/chdomain.ldif.j2 dest=/tmp/chdomain.ldif
+  - template: src=templates/basedomain.ldif.j2 dest=/tmp/basedomain.ldif
+
+  - file: path=/var/lib/ldap group=ldap state=directory
+
+  - copy: src=/usr/share/openldap-servers/DB_CONFIG.example dest=/var/lib/ldap/DB_CONFIG
+
+  - service: name=slapd state=started enabled=yes
+
+  - pause: seconds=10
+
+  - shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /tmp/changepass.ldif
+    ignore_errors: true
+  - shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif 
+    ignore_errors: true
+  - shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif 
+    ignore_errors: true
+  - shell: ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif 
+    ignore_errors: true
+  - shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/chdomain.ldif 
+    ignore_errors: true
+
+  - copy: src=templates/module.ldif dest=/etc/openldap/slapd.d/cn=config/cn=module{0}.ldif mode=0644
+  #- copy: src=templates/memberof.ldif  dest=/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb/olcOverlay={0}memberof.ldif mode=0644
+  #- copy: src=templates/refint.ldif dest=/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb/olcOverlay={1}refint.ldif mode=0644
+   
+  - service: name=slapd state=restarted
+
+  - name: add the overlay
+    command: bash -c 'ldapadd -Q -Y EXTERNAL -H ldapi:/// -f templates/overlay.ldif -v'
+
+  - name: create the structure
+    command: bash -c 'ldapadd -x -h 172.17.84.3 -p 389 -D "cn=Manager,dc=opentlc{{ GUID }},dc=com" -w password -f /tmp/basedomain.ldif'
+
+  - name: import the users
+    command: bash -c 'ldapadd -x -h 172.17.84.3 -p 389 -D "cn=Manager,dc=opentlc{{ GUID }},dc=com" -w password -f /tmp/add_user.ldif'

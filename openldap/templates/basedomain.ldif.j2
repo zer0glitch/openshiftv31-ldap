@@ -1,0 +1,20 @@
+# replace to your own domain name for "dc=***,dc=***" section
+dn: dc=opentlc{{ GUID }},dc=com
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: Red Hat
+dc: opentlc{{ GUID }}
+
+dn: cn=Manager,dc=opentlc{{ GUID }},dc=com
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+dn: ou=People,dc=opentlc{{ GUID }},dc=com
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=opentlc{{ GUID }},dc=com
+objectClass: organizationalUnit
+ou: Group

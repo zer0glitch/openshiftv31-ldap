@@ -1,0 +1,21 @@
+dn: dc=example{{ GUID }},dc=com
+dc: example{{ GUID }}
+o: Oopen Tlc {{ GUID }}
+objectclass: organization
+objectclass: dcObject
+
+dn: ou=People,dc=example{{ GUID }},dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=example{{ GUID }},dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: Groups
+
+dn: cn=openshift,ou=Groups,dc=example{{ GUID }},dc=com
+objectclass: top
+objectclass: groupOfNames
+member: cn=jamie,ou=People,dc=example{{ GUID }},dc=com
+cn: openshift

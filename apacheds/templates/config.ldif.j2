@@ -406,7 +406,7 @@ objectClass: top
 objectClass: organizationalUnit
 entryParentId: b10a63f1-15ee-4793-92be-f332065d549c
 
-dn: ads-partitionId=opentlc{{ GUID }},ou=partitions,ads-directoryServiceId=default,ou=
+dn: ads-partitionId=example{{ GUID }},ou=partitions,ads-directoryServiceId=default,ou=
  config
 ads-contextEntry:: ZG46IGRjPW9wZW50bGNHVUlELGRjPWNvbQpvYmplY3RjbGFzczogZG9tYWluC
  m9iamVjdGNsYXNzOiB0b3AKZGM6IG9wZW50bGNHVUlECgo=
@@ -416,14 +416,14 @@ objectClass: ads-partition
 objectClass: ads-base
 objectClass: ads-jdbmPartition
 ads-enabled: TRUE
-ads-partitionSuffix: dc=opentlc{{ GUID }},dc=com
+ads-partitionSuffix: dc=example{{ GUID }},dc=com
 entryUUID: f9d337f7-0192-470b-ba75-1bc37fa648ed
-ads-partitionId: opentlc{{ GUID }}
+ads-partitionId: example{{ GUID }}
 ads-partitionCacheSize: 10000
 ads-partitionSyncOnWrite: TRUE
 entryParentId: 1d52ea78-4cfd-4fcb-91e8-0312c3778ae5
 
-dn: ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=partitions,ads-directoryServiceId=
+dn: ou=indexes,ads-partitionId=example{{ GUID }},ou=partitions,ads-directoryServiceId=
  default,ou=config
 entryCSN: 20151218031303.185000Z#000000#000#000000
 entryUUID: f99d985a-8533-4800-8701-4a87887d125e
@@ -432,7 +432,7 @@ objectClass: top
 objectClass: organizationalUnit
 entryParentId: f9d337f7-0192-470b-ba75-1bc37fa648ed
 
-dn: ads-indexAttributeId=administrativeRole,ou=indexes,ads-partitionId=opentlc
+dn: ads-indexAttributeId=administrativeRole,ou=indexes,ads-partitionId=example
  {{ GUID }},ou=partitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.216000Z#000000#000#000000
@@ -445,7 +445,7 @@ ads-enabled: TRUE
 entryUUID: 0919bada-966b-4e91-a92a-c1bbfad15728
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=apacheAlias,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=p
+dn: ads-indexAttributeId=apacheAlias,ou=indexes,ads-partitionId=example{{ GUID }},ou=p
  artitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.223000Z#000000#000#000000
@@ -458,7 +458,7 @@ ads-enabled: TRUE
 entryUUID: 1da6acf4-43fa-4d83-a1d6-83649adbe57b
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=apacheOneAlias,ou=indexes,ads-partitionId=opentlc{{ GUID }},o
+dn: ads-indexAttributeId=apacheOneAlias,ou=indexes,ads-partitionId=example{{ GUID }},o
  u=partitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.221000Z#000000#000#000000
@@ -471,7 +471,7 @@ ads-enabled: TRUE
 entryUUID: 01224518-f5bf-45be-80d2-ccf213590e56
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=apachePresence,ou=indexes,ads-partitionId=opentlc{{ GUID }},o
+dn: ads-indexAttributeId=apachePresence,ou=indexes,ads-partitionId=example{{ GUID }},o
  u=partitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.203000Z#000000#000#000000
@@ -484,7 +484,7 @@ ads-enabled: TRUE
 entryUUID: 53022649-2e3a-4b1e-b870-160f2814df07
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=apacheRdn,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=par
+dn: ads-indexAttributeId=apacheRdn,ou=indexes,ads-partitionId=example{{ GUID }},ou=par
  titions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: TRUE
 entryCSN: 20151218031303.208000Z#000000#000#000000
@@ -497,7 +497,7 @@ ads-enabled: TRUE
 entryUUID: 367781ba-44e8-414c-8d4c-64d4643a0604
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=apacheSubAlias,ou=indexes,ads-partitionId=opentlc{{ GUID }},o
+dn: ads-indexAttributeId=apacheSubAlias,ou=indexes,ads-partitionId=example{{ GUID }},o
  u=partitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.198000Z#000000#000#000000
@@ -510,7 +510,7 @@ ads-enabled: TRUE
 entryUUID: 80ab2ad4-1999-49ea-af85-72ceb5e497a3
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=dc,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=partitions
+dn: ads-indexAttributeId=dc,ou=indexes,ads-partitionId=example{{ GUID }},ou=partitions
  ,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.219000Z#000000#000#000000
@@ -523,7 +523,7 @@ ads-enabled: TRUE
 entryUUID: bca16945-f5dd-4894-a508-7a7d7907b2a2
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=entryCSN,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=part
+dn: ads-indexAttributeId=entryCSN,ou=indexes,ads-partitionId=example{{ GUID }},ou=part
  itions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.210000Z#000000#000#000000
@@ -536,7 +536,7 @@ ads-enabled: TRUE
 entryUUID: 52860bfa-8647-4bbb-a8a2-29de6df37b85
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=krb5PrincipalName,ou=indexes,ads-partitionId=opentlc
+dn: ads-indexAttributeId=krb5PrincipalName,ou=indexes,ads-partitionId=example
  {{ GUID }},ou=partitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.225000Z#000000#000#000000
@@ -549,7 +549,7 @@ ads-enabled: TRUE
 entryUUID: 394f9018-e165-44e9-b525-c0b1fa59ef46
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=objectClass,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=p
+dn: ads-indexAttributeId=objectClass,ou=indexes,ads-partitionId=example{{ GUID }},ou=p
  artitions,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.201000Z#000000#000#000000
@@ -562,7 +562,7 @@ ads-enabled: TRUE
 entryUUID: 3e30261f-4642-4c70-b43d-d22e1242ca5b
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=ou,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=partitions
+dn: ads-indexAttributeId=ou,ou=indexes,ads-partitionId=example{{ GUID }},ou=partitions
  ,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.213000Z#000000#000#000000
@@ -575,7 +575,7 @@ ads-enabled: TRUE
 entryUUID: 828810ef-96d5-4952-8a9d-24ac2f5ae08c
 entryParentId: f99d985a-8533-4800-8701-4a87887d125e
 
-dn: ads-indexAttributeId=uid,ou=indexes,ads-partitionId=opentlc{{ GUID }},ou=partition
+dn: ads-indexAttributeId=uid,ou=indexes,ads-partitionId=example{{ GUID }},ou=partition
  s,ads-directoryServiceId=default,ou=config
 ads-indexHasReverse: FALSE
 entryCSN: 20151218031303.205000Z#000000#000#000000
@@ -885,7 +885,7 @@ ads-krbAllowableClockSkew: 300000
 ads-krbPrimaryRealm: OPENTLC{{ GUID }}.COM
 ads-krbForwardableAllowed: TRUE
 ads-krbEmptyAddressesAllowed: TRUE
-ads-searchBaseDN: ou=users,dc=opentlc{{ GUID }},dc=com
+ads-searchBaseDN: ou=users,dc=example{{ GUID }},dc=com
 ads-krbPostdatedAllowed: TRUE
 ads-krbPAEncTimestampRequired: TRUE
 ads-krbRenewableAllowed: TRUE

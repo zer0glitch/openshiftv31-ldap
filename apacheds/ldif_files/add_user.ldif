@@ -1,4 +1,4 @@
-dn: cn=openshift,ou=People,dc=opentlc{{ GUID }},dc=com
+dn: cn=openshift,ou=People,dc=opentlc07a7,dc=com
 changetype: add
 objectclass: top
 objectclass: person
@@ -10,4 +10,3 @@ sn: openshift
 ou: openshift
 uid: openshift
 userPassword: password
-
