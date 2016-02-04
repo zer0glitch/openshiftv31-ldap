@@ -1,4 +1,4 @@
-dn: cn=openshift,ou=People,dc=opentlc07a7,dc=com
+dn: cn=luke,ou=People,dc=opentlcx,dc=com
 changetype: add
 objectclass: top
 objectclass: person
@@ -6,7 +6,8 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Red Hat Open Shift
 givenName: Red Hat
-sn: openshift
-ou: openshift
-uid: openshift
+sn: luke
+ou: luke
+uid: luke
+mail: luke@redhat.com
 userPassword: password

@@ -8,6 +8,7 @@
     with_items:
      - java-1.8.0-openjdk
      - java-1.8.0-openjdk-devel
+     - gnutls-utils
      - openldap
      - openldap-servers
      - openldap-clients
@@ -20,6 +21,7 @@
     ignore_errors: true
 
   - template: src=templates/ldap.conf.j2 dest=/etc/openldap/ldap.conf
+  - shell: yes | cp -rf files/etc_openldap/* /etc/openldap
 
   - template: src=templates/create.ldif.j2 dest=/tmp/create.ldif
   - template: src=templates/add_user.ldif.j2 dest=/tmp/add_user.ldif
@@ -29,7 +31,18 @@
 
   - file: path=/var/lib/ldap group=ldap state=directory
 
-  - copy: src=/usr/share/openldap-servers/DB_CONFIG.example dest=/var/lib/ldap/DB_CONFIG
+  - copy: src=/usr/share/openldap-servers/DB_CONFIG.example dest=/var/lib/ldap/DB_CONFIG mode=0755 owner=ldap
+  - copy: src=files/cnconfig.ldif dest=/etc/openldap/slapd.d/cn=config.ldif mode=0755 owner=ldap
+  - file: path=/etc/openldap/slapd.d/cn=config owner=ldap group=ldap state=directory mode=0755 recurse=true
+  - file: path=/etc/openldap owner=ldap group=ldap state=directory mode=0755 recurse=true
+  - file: path=/etc/opentlc owner=root group=root state=directory mode=0755 recurse=true
+  - service: name=slapd state=started enabled=yes
+  - shell: yes | cp -rf templates/ca /etc/opentlc
+
+  - template: src=templates/ca/createserverkey.sh dest=/etc/opentlc/ca/createserverkey.sh mode=0755
+
+  - copy: src=templates/module.ldif dest=/etc/openldap/slapd.d/cn=config/cn=module{0}.ldif mode=0644  owner=ldap
+  - copy: src=files/tls.ldif dest=/etc/opentlc/ca/tls.ldif
 
   - service: name=slapd state=started enabled=yes
 
@@ -46,10 +59,6 @@
   - shell: ldapmodify -Y EXTERNAL -H ldapi:/// -f /tmp/chdomain.ldif 
     ignore_errors: true
 
-  - copy: src=templates/module.ldif dest=/etc/openldap/slapd.d/cn=config/cn=module{0}.ldif mode=0644
-  #- copy: src=templates/memberof.ldif  dest=/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb/olcOverlay={0}memberof.ldif mode=0644
-  #- copy: src=templates/refint.ldif dest=/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb/olcOverlay={1}refint.ldif mode=0644
-   
   - service: name=slapd state=restarted
 
   - name: add the overlay
@@ -60,3 +69,9 @@
 
   - name: import the users
     command: bash -c 'ldapadd -x -h 172.17.84.3 -p 389 -D "cn=Manager,dc=opentlc{{ GUID }},dc=com" -w password -f /tmp/add_user.ldif'
+
+  # - command: openssl genrsa -out /etc/openldap/certs/ca.key 2048
+
+  # - command: openssl req -new -x509 -key /etc/openldap/certs/ca.key -out /etc/openldap/certs/opentlc.crt -days 3650 -subj "/C=US/ST=NC/L=Raleigh/O=opentlc/CN=ldap,dc=opentlc{{ GUID }},dc=com"
+
+  #- command: ldapmodify -x -h 172.17.843.3 -D "cn=Manager,dc=opentlc{{ GUID }},dc=com" -w password -f files/tls.ldif

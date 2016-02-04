@@ -2,10 +2,11 @@
 # LDAP Defaults
 #
 
-URI                 ldap://{{ inventory_hostname }}
+#URI                 ldap:///
+#URI                 ldap://{{ inventory_hostname }}
 BASE                dc=opentlc{{ GUID }},dc=com
 
-rootdn          "cn=root,dc=opentlc{{ GUID }},dc=com"
+rootdn          "cn=Manager,dc=opentlc{{ GUID }},dc=com"
 rootpw		{SSHA}3dbfQu6dBzxuxgbQB8hMegguJvy8POVm
 
 

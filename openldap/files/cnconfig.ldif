@@ -1,0 +1,15 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 cc135ec1
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcArgsFile: /var/run/openldap/slapd.args
+olcPidFile: /var/run/openldap/slapd.pid
+structuralObjectClass: olcGlobal
+entryUUID: 312f8f44-59b0-1035-9e3a-3f01fdd5b342
+creatorsName: cn=config
+createTimestamp: 20160128021131Z
+olcLogLevel: stats
+entryCSN: 20160130211739.406877Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20160130211739Z

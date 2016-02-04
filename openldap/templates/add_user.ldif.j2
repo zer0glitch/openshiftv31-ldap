@@ -1,18 +1,54 @@
-dn: cn=jamie,ou=People,dc=opentlc{{ GUID }},dc=com
+dn: cn=han,ou=People,dc=opentlc{{ GUID }},dc=com
 changetype: add
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: jamie
-givenName: RedHat
-surName: whetsell
-ou: jamie
-uid: jamie
+cn: han
+sn: Solo
+givenName: Han
+ou: han
+uid: han
+mail: solo@redhat.com
+userPassword: password
+
+dn: cn=luke,ou=People,dc=opentlc{{ GUID }},dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: luke
+sn: skywalker
+givenName: luke
+ou: luke
+uid: luke
+mail: xwing@redhat.com
+userPassword: password
+
+dn: cn=vader,ou=People,dc=opentlc{{ GUID }},dc=com
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: vader
+sn: darth
+givenName: Anakin
+ou: vader
+uid: vader
+mail: puppylove@redhat.com
 userPassword: password
 
 dn: cn=openshift,ou=Group,dc=opentlc{{ GUID }},dc=com
 objectclass: top
 objectclass: groupOfNames
-member: cn=jamie,ou=People,dc=opentlc{{ GUID }},dc=com
+member: cn=han,ou=People,dc=opentlc{{ GUID }},dc=com
+member: cn=vader,ou=People,dc=opentlc{{ GUID }},dc=com
+cn: openshift
+
+dn: cn=osadmin,ou=Group,dc=opentlc{{ GUID }},dc=com
+objectclass: top
+objectclass: groupOfNames
+member: cn=vader,ou=People,dc=opentlc{{ GUID }},dc=com
 cn: openshift

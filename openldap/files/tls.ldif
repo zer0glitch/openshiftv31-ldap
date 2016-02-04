@@ -1,0 +1,22 @@
+dn: cn=config
+changetype:  modify
+replace: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/openldap/certs/ca.cert.pem
+-
+replace: olcTLSCACertificatePath
+olcTLSCACertificatePath: /etc/openldap/certs
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/openldap/certs/server.crt
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/openldap/certs/server.key
+-
+replace: olcTLSCipherSuite
+olcTLSCipherSuite: HIGH:+SSLv3:+TLSv1:MEDIUM:+SSLv2:@STRENGTH:+SHA:+MD5:!NULL
+-
+replace: olcTLSVerifyClient
+olcTLSVerifyClient: allow
+#-
+#replace: olcTLSProtocolMin
+#olcTLSProtocolMin: 3.2
